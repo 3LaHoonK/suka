@@ -1,11 +1,11 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 
-<!-- index-431:41-->
+<!-- index28:48-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home Version Four || limupa - Digital Products Store ECommerce Bootstrap 4 Template</title>
+    <title>@yield('title')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -44,62 +44,54 @@
     <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
 <body>
-    <!--**********************************
-        Main wrapper start
-    ********************-->
+<!-- Begin Body Wrapper -->
 
-    @yield('index')
+@yield('index')
 
-
-    <!--*******************
-     Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-    <!-- Popper js -->
-    <script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
-    <!-- Bootstrap V4.1.3 Fremwork js -->
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    <!-- Ajax Mail js -->
-    <script src="{{asset('assets/js/ajax-mail.js')}}"></script>
-    <!-- Meanmenu js -->
-    <script src="{{asset('assets/js/jquery.meanmenu.min.js')}}"></script>
-    <!-- Wow.min js -->
-    <script src="{{asset('assets/js/wow.min.js')}}"></script>
-    <!-- Slick Carousel js -->
-    <script src="{{asset('assets/js/slick.min.js')}}"></script>
-    <!-- Owl Carousel-2 js -->
-    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
-    <!-- Magnific popup js -->
-    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
-    <!-- Isotope js -->
-    <script src="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
-    <!-- Imagesloaded js -->
-    <script src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
-    <!-- Mixitup js -->
-    <script src="{{asset('assets/js/jquery.mixitup.min.js')}}"></script>
-    <!-- Countdown -->
-    <script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
-    <!-- Counterup -->
-    <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
-    <!-- Waypoints -->
-    <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
-    <!-- Barrating -->
-    <script src="{{asset('assets/js/jquery.barrating.min.js')}}"></script>
-    <!-- Jquery-ui -->
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-    <!-- Venobox -->
-    <script src="{{asset('assets/js/venobox.min.js')}}"></script>
-    <!-- Nice Select js -->
-    <script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
-    <!-- ScrollUp js -->
-    <script src="{{asset('assets/js/scrollUp.min.js')}}"></script>
-    <!-- Main/Activator js -->
-    <script src="{{asset('assets/js/main.js')}}"></script>
+<!-- Body Wrapper End Here -->
+<!-- jQuery-V1.12.4 -->
+<script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+<!-- Popper js -->
+<script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
+<!-- Bootstrap V4.1.3 Fremwork js -->
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+<!-- Ajax Mail js -->
+<script src="{{asset('assets/js/ajax-mail.js')}}"></script>
+<!-- Meanmenu js -->
+<script src="{{asset('assets/js/jquery.meanmenu.min.js')}}"></script>
+<!-- Wow.min js -->
+<script src="{{asset('assets/js/wow.min.js')}}"></script>
+<!-- Slick Carousel js -->
+<script src="{{asset('assets/js/slick.min.js')}}"></script>
+<!-- Owl Carousel-2 js -->
+<script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+<!-- Magnific popup js -->
+<script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+<!-- Isotope js -->
+<script src="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
+<!-- Imagesloaded js -->
+<script src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
+<!-- Mixitup js -->
+<script src="{{asset('assets/js/jquery.mixitup.min.js')}}"></script>
+<!-- Countdown -->
+<script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
+<!-- Counterup -->
+<script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
+<!-- Waypoints -->
+<script src="{{asset('assets/js/waypoints.min.js')}}"></script>
+<!-- Barrating -->
+<script src="{{asset('assets/js/jquery.barrating.min.js')}}"></script>
+<!-- Jquery-ui -->
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+<!-- Venobox -->
+<script src="{{asset('assets/js/venobox.min.js')}}"></script>
+<!-- Nice Select js -->
+<script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
+<!-- ScrollUp js -->
+<script src="{{asset('assets/js/scrollUp.min.js')}}"></script>
+<!-- Main/Activator js -->
+<script src="{{asset('assets/js/main.js')}}"></script>
 </body>
 
-<!-- index-431:47-->
+<!-- index30:23-->
 </html>

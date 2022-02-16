@@ -2,30 +2,30 @@
     <!-- Left navbar links -->
 
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">{{__("admin/nav.Home")}}</a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{route('Dashbord')}}" class="nav-link">{{__("admin/nav.Home")}}</a>
+        </li>
     </ul>
 
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="{{__("admin/nav.Search")}}" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
+        <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="{{__("admin/nav.Search")}}" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
-      </div>
     </form>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+    <ul class="navbar-nav ml-auto mr-3">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
             </a>
@@ -81,49 +81,50 @@
                 <a href="#" class="dropdown-item dropdown-footer">{{__("admin/nav.See-All-Messages")}}</a>
             </div>
         </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 {{__("admin/nav.Notifications")}}</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">{{__("admin/nav.See-All-Notifications")}}</a>
-        </div>
-      </li>
-      <!--  Dropdown Menu languages -->
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-bell"></i>
+                <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 {{__("admin/nav.Notifications")}}</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">{{__("admin/nav.See-All-Notifications")}}</a>
+            </div>
+        </li>
+        <!--  Dropdown Menu languages -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                <i class="flag-icon flag-icon-us"></i>
+                <i class="flag-icon flag-icon-{{ appLocale() == 'en' ? 'us' : 'eg'}}"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-right p-0" style="">
+            <div class="dropdown-menu dropdown-menu-right" style="">
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <a class="dropdown-item active" rel="alternate" hreflang="{{ $localeCode }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                            <i class="flag-icon flag-icon-{{ $properties['native'] == 'English' ? 'us' : 'eg'}} "></i>
-                            {{ $properties['name']}}
-                        </a>
+                    <a class="dropdown-item {{$properties['native'] == appLocale() ? 'active' : ''}}" rel="alternate" hreflang="{{ $localeCode }}"
+                       href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                        <i class="flag-icon flag-icon-{{ $properties['native'] == 'English' ? 'us' : 'eg'}} "></i>
+                        {{ $properties['name']}}
+                    </a>
                 @endforeach
 
             </div>
         </li>
-      <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                 <i class="fas fa-caret-down"></i>
             </a>
@@ -140,4 +141,4 @@
             </div>
         </li>
     </ul>
-  </nav>
+</nav>

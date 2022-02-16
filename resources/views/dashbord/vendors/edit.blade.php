@@ -1,167 +1,181 @@
 @extends('layouts.adminStatic')
-@section('editVendors')
+@section('title')
+    {{__('admin/vendor.editTitle') . $data->slug}}
+@endsection
+@section('editCat')
 
-<div class="content-body" style="min-height: 876px;">
 
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('Dashbord')}}">{{__('admin.Home')}}</a></li>
-                <li class="breadcrumb-item active"><a href="{{route('admin.vendors')}}">{{__('admin.Vendors-list')}}</a></li>
-                <li class="breadcrumb-item active">{{__('admin.addVendor')}}</li>
-            </ol>
-        </div>
-    </div>
-    <!-- row -->
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-validation">
-                            <form class="form-valide"  method="post" action="{{route('admin.editvendorscheck',$dataBack -> id )}}"  enctype="multipart/form-data" >
-                                @csrf
-                                <input hidden name="id" value="{{$dataBack -> id}}">
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-Name">{{__('admin.Vendor-Name')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-Name" name="name"    value="{{$dataBack -> name}}" >
-                                        @error ('name')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{__('admin/vendor.edit-vendor') . $data ->firstName . ' ' . $data ->lastName}}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{route('Dashbord')}}">{{__('admin/vendor.home')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.vendors')}}">{{__('admin/vendor.vendor')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('admin/vendor.edit')}}</li>
+                        </ol>
+                    </div>
 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-email" >{{__('admin.Vendor-Email')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">@</span>
-                                            <input type="text" class="form-control" name="email" id="val-email"  aria-label="Username"
-                                            value="{{$dataBack -> email}}" aria-describedby="basic-addon1" >
-                                        </div>
-                                        @error ('email')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-password" >{{__('admin.Vendor-password')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">*</span>
-                                            <input type="password" class="form-control" name="password" id="val-email"  aria-label="password"
-                                             aria-describedby="basic-addon1" placeholder="old value is saved">
-                                        </div>
-                                        @error ('password')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-password_confirmation" >{{__('admin.Vendor-password_confirmation')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">*</span>
-                                            <input type="password" class="form-control" name="password_confirmation" id="val-email"  aria-label="password_confirmation"
-                                              aria-describedby="basic-addon1" placeholder="old value is saved">
-                                        </div>
-                                        @error ('password_confirmation')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-Address">{{__('admin.Vendor-Address')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-Address"  name="address"  value="{{$dataBack -> address}}">
-                                        @error ('address')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                        @error ('address')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-Mobile">{{__('admin.Vendor-Mobile')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-Mobile" name="mobile"  value="{{$dataBack -> mobile }}">
-                                        @error ('mobile')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-image">{{__('admin.Vendor-Logo')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <input type="file" name="logo" class="form-control" id="inputGroupFile02">
-                                            <label class="input-group-text" for="inputGroupFile02">on dont change old value is saved</label>
-                                          </div>
-                                        {{-- <input type="file" class="form-control" id="val-image" name="logo"  > --}}
-                                        @error ('logo')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-category_id">{{__('admin.Vendor-category_id')}}<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="val-category_id" name="category_id">
-                                            <option value="">Please select</option>
-                                            @isset($category)
-                                                @foreach ($category as $cat)
-                                                <option {{$cat->id == $dataBack->category_id ? 'selected' : ''}} value="{{$cat->id}}">{{$cat->name}}</option>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <section class="content">
+            <form method="POST"  action="{{route('admin.updateVendors' , $data->id)}}" enctype="multipart/form-data">
+                @csrf
+                <div class="container-fluid">
+                    <!-- edit vendor -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">{{__('admin/vendor.addTap')}}</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-12 text-center">
+                                            {{__("admin/vendor.category")}}</label>
+                                        <div class="form-group">
+                                            <select name="category_id" class="form-control select2bs4" style="width: 100%;">
+                                                @foreach($select_data as $dataArray)
+                                                    <option {{$data->category_id = $dataArray -> id ? 'selected' : ''}} value="{{$dataArray ->id }}" >{{$dataArray -> name}}</option>
                                                 @endforeach
-                                            @endisset
-                                        </select>
-                                        @error ('category_id')
-                                            <div class="alert alert-danger">{{$message}}</div>
+                                            </select>
+                                        </div>
+                                        @error ("category_id")
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-12 text-center">{{__("admin/vendor.slug")}}</label>
+                                        <input  name="slug" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__('admin/vendor.slug_Ph')}}" value="{{$data->slug}}">
+                                        <input hidden  name="admin_create" value="{{Auth::user()->name}}">
+                                        @error ("slug")
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.firstname")}}</label>
+                                        <input  name="firstName" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.firstname_ph")}}" value="{{$data->firstName}}">
+                                        @error('firstName')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.lastname")}}</label>
+                                        <input  name="lastName" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.lastname_ph")}}" value="{{$data->lastName}}">
+                                        @error('lastName')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.store-name")}}</label>
+                                        <input  name="store_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.store-name_ph")}}" value="{{$data->store_name}}">
+                                        @error('store_name')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.email")}}</label>
+                                        <input  name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.email_ph")}}" value="{{$data->email}}">
+                                        @error('email')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.address")}}</label>
+                                        <input  name="address" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.address_ph")}}" value="{{$data->address}}">
+                                        @error('address')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.work-phone")}}</label>
+                                        <input  name="work_phone" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.work-phone_ph")}}" value="{{$data->work_phone}}">
+                                        @error('work_phone')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.personal-phone")}}</label>
+                                        <input  name="personal_phone" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.personal-phone_ph")}}" value="{{$data->personal_phone}}">
+                                        @error('personal_phone')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{__("admin/vendor.home-phone")}}</label>
+                                        <input  name="home_phone" type="text" class="form-control" id="exampleInputEmail1" placeholder="{{__("admin/vendor.home-phone_ph")}}" value="{{$data->home_phone}}">
+                                        @error('home_phone')
+                                        <blockquote class="quote-danger">
+                                            <p style="color: #dc3545"> {{$message}}</p>
+                                        </blockquote>
                                         @enderror
                                     </div>
                                 </div>
 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label"><a href="#">{{__('admin.active')}} &amp; {{__('admin.inactive')}}</a>  <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="basic-form" >
-                                            <div class="form-group" >
-                                                <div class="radio mb-2">
-                                                    <label class="col-lg-3" style="color:green;"><input {{ $dataBack->active =='1' ? 'checked' : ''}}    type="radio" name="active" value="1">{{__('admin.active')}}</label>
-                                                    <label class="col-lg-3" style="color:red"><input    {{ $dataBack->active =='0' ? 'checked' : ''}}   type="radio" name="active" value="0">{{__('admin.inactive')}}</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-lg-12 ml-auto"><br>
-                                        <button type="submit" class="btn btn-block btn-primary">{{__('admin.edite')}}</button>
-                                    </div>
-                                </div>
-
-                            </form>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="{{__("admin/category.add")}}">
+                            <button  class="btn btn-danger float-right"><a href="{{redirect()->back()}}"></a>{{__("admin/category.Cancel")}}</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </form>
+        </section>
+
+
     </div>
-    <!-- #/ container -->
-</div>
 @endsection
-
-
-

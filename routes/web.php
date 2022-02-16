@@ -26,7 +26,7 @@ Route::group(
 Auth::routes();
 
 Route::get('/', function (){
-    return view('welcome');})
+    return view('site/index');})
     ->name('home_page');
 
 //Route::get('/', [HomeController::class, 'index'])->name('home');

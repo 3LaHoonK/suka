@@ -1,130 +1,166 @@
 @extends('layouts.adminStatic')
-@section('vendors')
+@section('title')
+    {{__('admin/vendor.vendor-list')}}
+@endsection
+@section('viewCat')
 
-
-<div class="content-body">
-
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('Dashbord')}}">{{__('admin.Home')}}</a></li>
-                <li class="breadcrumb-item active"><a href="{{route('admin.languages')}}">{{__('admin.Languages')}}</a></li>
-            </ol>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{__('admin/vendor.vendor-list')}}</h1>
+                        <button hidden type="button" id="alert" class="btn btn-success swalDefaultSuccess">
+                            {{Session::get('success')}}
+                        </button>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{route('Dashbord')}}">{{__('admin/vendor.home')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.vendors')}}">{{__('admin/vendor.vendor')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('admin/vendor.vendor-list')}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="col-12">
+            @include('layouts.alert')
         </div>
-    </div>
-    <!-- row -->
-
-    <div class="container-fluid">
-        @include('includes.admin.allert')
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-
-                    <div class="card-body">
-                        <div class="row">
-                                <div class="col-6" >
-                                    <h2 class="card-title">{{__('admin.Vendors-list')}} / <a href="{{route('admin.addvendors')}}"><span>add new</span></a></h2>
+        <div class="card">
+            <div class="card-header text-center col-12">
+                <a href="{{route('admin.createFormVendors')}}">
+                    <button class="btn btn-primary text-center float-left">
+                        <i class="fas fa-plus"></i>
+                        {{__('admin/vendor.add-vendor')}}
+                    </button>
+                </a>
+                <div class="float-right">
+                    <td class="text-right py-0 align-middle">
+                        <div class="btn-group btn-group-sm">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right text-center" role="menu">
+                                    <a href="{{route('admin.vendors')}}" class="dropdown-item">{{__('admin/vendor.all-vendor')}}</a>
+                                    <a href="{{route('admin.selectVendors' , $action='active')}}" class="dropdown-item">{{__('admin/vendor.active-vendor')}}</a>
+                                    <a href="{{route('admin.selectVendors' , $action='inactive')}}" class="dropdown-item">{{__('admin/vendor.inactive-vendor')}}</a>
                                 </div>
-                                <div class="col-6" >
-                                    <div class="dropdown custom-dropdown float-right">
-                                            <div data-toggle="dropdown" aria-expanded="false">
-                                                <i class="ti-more-alt"></i>
-                                            </div>
-                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(14px, 21px, 0px);">
-                                            <a class="dropdown-item" href="{{route('admin.selectvendors',$action = 'all')}}">All</a>
-                                            <a class="dropdown-item" href="{{route('admin.selectvendors',$action = 'active')}}">active</a>
-                                            <a class="dropdown-item" href="{{route('admin.selectvendors',$action = 'inactive')}}">inactive</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+
                         </div>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered zero-configuration">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </th>
-                                        <th>{{__('admin.ID')}}</th>
-                                        <th>{{__('admin.NAME')}}</th>
-                                        <th>{{__('admin.cat-name')}}</th>
-                                        <th>{{__('admin.logo')}}</th>
-                                        <th>{{__('admin.address')}}</th>
-                                        <th>{{__('admin.Mobile')}}</th>
-                                        <th>{{__('admin.Status')}}</th>
-                                        <th>{{__('admin.Settings')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @isset($dataBack)
-                        @foreach ($dataBack as $vendor)
-                            <tr style="text-align: center">
-
-                                <td class="text-bold-500">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                    </div>
-                                </td>
-                                <td class="text-bold-500">{{$vendor->id}}</td>
-                                <td>{{$vendor->name}}</td>
-                                <td>{{$vendor->category->name}}</td>
-                                <td><img  src="asset{{('assets') . $vendor->logo}}"></td>
-                                <td>{{$vendor->address}}</td>
-                                <td>{{$vendor->mobile}}</td>
-                                <td style="color:{{$vendor->active == 1 ? '#0E9A00' : '#8c0615'}}">{{$vendor->active == 1 ? 'Active' : 'Inactive'}}</td>
-                                <td class="text-bold-500">
-
-                                    <a alt="{{__('admin.active')}}" href="{{route('admin.activeVendors', $vendor -> id )}}">
-                                        <button rel="dlk" type="button" class="btn btn-{{$vendor->active == 1 ? 'info' : 'danger'}}"><i class="icon-{{$vendor->active == 1 ? 'lock' : 'key'}}"></i></button>
-                                    </a>
-
-                                    <a alt="{{__('admin.edite')}}" href="{{route('admin.editvendors', $vendor -> id )}}">
-                                        <button type="button" class="btn btn-success"><i class="fa fa-edit"></i></button>
-                                    </a>
-
-                                    <a alt="{{__('admin.delete')}}" href="{{route('admin.deleteVendors', $vendor -> id )}}">
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-close"></i></button>
-                                    </a>
-                                </td>
+                    </td>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline " role="grid" aria-describedby="example1_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">{{__('admin/vendor.id')}}</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">{{__('admin/vendor.firstname')}}</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">{{__('admin/vendor.lastname')}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('admin/vendor.store-name')}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('admin/vendor.slug')}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">{{__('admin/vendor.status')}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">{{__('admin/vendor.setting')}}</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            @isset($data)
+                                @foreach ($data as $dataArray)
+                                    <tr role="row" class="odd text-center">
+                                        <td>{{$dataArray->id}}</td>
+                                        <td>{{$dataArray->firstName}}</td>
+                                        <td>{{$dataArray->lastName}}</td>
+                                        <td>{{$dataArray->store_name}}</td>
+                                        <td>{{$dataArray->slug}}</td>
+                                        <td style="color:{{$dataArray->is_active == 0 ? '#0E9A00' : '#8c0615'}}">
+                                            <span class='badge badge-{{statusColor($dataArray->is_active)}}'>{{__('admin/vendor.'.status($dataArray->is_active))}}</span>
+                                        <td class="text-right py-0 align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                        <!--detalis action-->
+                                                        <button type="button" class="btn btn-default ">
+                                                            <a href="{{route('admin.detailVendors',$dataArray->slug)}}" class="dropdown-item"><i class="fa fa-eye"></i>
+                                                                {{__('admin/vendor.detail')}}</a>
+                                                        </button>
+                                                        <!--edit action-->
+                                                        <button type="button" class="btn btn-default" >
+                                                            <a href="{{route('admin.editVendors',$dataArray->slug)}}" class="dropdown-item"><i class="fa fa-edit"></i>
+                                                                {{__('admin/vendor.edit')}}</a>
+                                                        </button>
+                                                        <!--status action-->
+                                                        <button type="button" class="btn btn-default">
+                                                            <a href="{{route('admin.activeVendors',$dataArray->id)}}" class="dropdown-item"><i class="fa fa-key"></i>
+                                                                {{__('admin/vendor.' . statusSetting($dataArray->is_active))}}</a>
+                                                        </button>
+                                                        <!--delete action-->
+                                                        <button type="button" class="btn btn-default">
+                                                            <a href="{{route('admin.deleteVendors',$dataArray->id)}}" class="dropdown-item"><i class="fa fa-trash"></i>
+                                                                {{__('admin/vendor.delete')}}</a>
+                                                        </button>
 
 
-                        @endforeach
+                                                    </div>
+                                                </div>
 
-                    @endisset
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="checkbox">
                                             </div>
-                                        </th>
-                                        <th>{{__('admin.ID')}}</th>
-                                        <th>{{__('admin.NAME')}}</th>
-                                        <th>{{__('admin.EMAIL')}}</th>
-                                        <th>{{__('admin.LOGO')}}</th>
-                                        <th>{{__('admin.ADDRESS')}}</th>
-                                        <th>{{__('admin.MOBILE')}}</th>
-                                        <th>{{__('admin.Status')}}</th>
-                                        <th>{{__('admin.Settings')}}</th>
+                                        </td>
                                     </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                @endforeach
+                            @endisset
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.id')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.firstname')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.lastname')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.store-name')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.slug')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.status')}}</th>
+                                <th rowspan="1" colspan="1">{{__('admin/vendor.setting')}}</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- /.card-body -->
     </div>
 
-
-
-</div>
-
+    <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="content" class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
 
 @endsection
